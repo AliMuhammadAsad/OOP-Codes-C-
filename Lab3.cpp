@@ -119,6 +119,66 @@ int main(){
 
 //----------------------------------------------------------------------------------------//
 
+//Q3 - String Length
+// Takes a string as input from the user and returns its length. Use cin.get()
+
+#include<iostream>
+
+using namespace std;
+
+int string_length(char line[]){
+    int count = 0;
+    while (line[count] != '\0'){count++;}
+    return count;
+}
+
+int main(){
+    int length; char line[1000];
+    cin.get(line, 1000);
+    length = string_length(line);
+    cout << length;
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------//
+
+//Q4 Bad Intern
+//Corrects a given sequence of strings with specific characters - lower case 'a', 'c', 'g', 't' to be upper cased, upper case
+// 'A', 'C', 'G', 'T' to be taken as it is, rest omitted.
+
+#include<iostream>
+
+using namespace std;
+
+void corrector(char bad_arr[], char good_arr[]){
+    int c = 0;
+    while (bad_arr[c] != '\0'){
+        if (bad_arr[c] == 'a'){good_arr[c] = 'A';}
+        else if (bad_arr[c] == 'c'){good_arr[c] = 'C';}
+        else if (bad_arr[c] == 'g'){good_arr[c] = 'G';}
+        else if (bad_arr[c] == 't'){good_arr[c] = 'T';}
+        else if (bad_arr[c] == 'A' || bad_arr[c] == 'C' || bad_arr[c] == 'G' || bad_arr[c] == 'T'){
+            good_arr[c] = bad_arr[c];}
+        else {good_arr[c] = ' ';}
+        c++;
+    }
+    good_arr[c] = '\0';
+}
+
+int main(){
+    char seq[100], corr_seq[100];
+    cin.get(seq, 100);
+    corrector(seq, corr_seq);
+    int i = 0;
+    while(corr_seq[i] != '\0'){
+        if(corr_seq[i] == ' '){i++; continue;}
+        else {cout << corr_seq[i];}
+        i++;
+    }
+}
+
+//----------------------------------------------------------------------------------------//
+
 //Q5 - Chronological Order
 // Takes number of years, then consecutive years and outputs them in chronological order order using bubble sort
 
