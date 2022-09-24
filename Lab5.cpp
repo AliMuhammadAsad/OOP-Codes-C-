@@ -2,11 +2,11 @@
 
 #include<iostream>
 using namespace std;
+
 double *add(double *c1, double *c2){
     double *c3 = new double[2];
     *(c3 + 0) = *(c1 + 0) + *(c2 + 0);
     *(c3 + 1) = *(c1 + 1) + *(c2 + 1);
-    // cout << *(c3 + 0) << " + " << *(c3 + 1) << "i";
     return c3;
 }
 
@@ -14,7 +14,6 @@ double *add(double *c1, double c2){
     double *c3 = new double[2];
     *(c3 + 0) = *(c1 + 0) + c2;
     *(c3 + 1) = *(c1 + 1);
-    // cout << c3[0] << " + " << c3[1] << "i";
     return c3;
 }
 
@@ -23,7 +22,6 @@ double *subtract(double *c1, double *c2){
     double *c3 = new double[2];
     *(c3 + 0) = *(c1 + 0) - *(c2 + 0);
     *(c3 + 1) = *(c1 + 1) - *(c2 + 1);
-    // cout << c3[0] << " + " << c3[1] << "i";
     return c3;
 }
 
@@ -31,7 +29,6 @@ double *subtract(double *c1, double c2){
     double *c3 = new double[2];
     *(c3 + 0) = *(c1 + 0) - c2;
     *(c3 + 1) = *(c1 + 1);
-    // cout << c3[0] << " + " << c3[1] << "i";
     return c3;
 }
 
@@ -41,7 +38,6 @@ double *multiply(double *c1, double *c2){
     double *c3 = new double[2];
     *(c3 + 0) = (*(c1 + 0) * *(c2 + 0)) - (*(c1 + 1) * *(c2 + 1));
     *(c3 + 1) = (*(c1 + 0) * *(c2 + 1)) + (*(c1 + 1) * *(c2 + 0));
-    // cout << c3[0] << " + " << c3[1] << "i";
     return c3;
 }
 
@@ -49,7 +45,6 @@ double *multiply(double *c1, double c2){
     double *c3 = new double[2];
     *(c3 + 0) = *(c1 + 0) * c2;
     *(c3 + 1) = *(c1 + 1) * c2;
-    // cout << c3[0] << " + " << c3[1] << "i";
     return c3;
 }
 
@@ -62,6 +57,7 @@ void show(double *c){
     }
     
 }
+
 
 int main()
 {
@@ -105,7 +101,6 @@ int RemoveDuplicates(int *arr, int size){
     }
     return i+1;
 }
-
 // Do Not Make Changes in Main
 
 
@@ -133,40 +128,75 @@ int main() {
 //---------------------------------------------------------------------------------------------------------------------------------------------//
 //Q3 - Count holes in a number/word - function overloading and recursion.
 
+#include<iostream>
+#include<string>
+#include<cstring>
+
+using namespace std;
+
+// write your code here
 int num_holes = 0; int rem = 0;
 
-int countnHoles(int num){
+int countHoles(int num){
     if(num > 0){
         rem = num % 10;
         if(rem == 0 || rem == 4 || rem == 6 || rem == 9)
             num_holes = num_holes + 1;
-        else if (rem == 8)
+        else if(rem == 8)
             num_holes = num_holes + 2;
-        else
+        else 
             num_holes = num_holes;
-        return countnHoles(num/10);
+        return countHoles(num/10);
     }
     return num_holes;
 }
 
 int string_length(char line[]){
     int count = 0;
-    while (line[count] != '\0'){count++;}
+    while(line[count] != '\0')
+        count++;
     return count;
 }
 
-int counter = 0;
-int countnHoles(char* word){
+int iter = 0;
+int countHoles(char* word){
     int length = string_length(word);
-    if(counter < length){
-        if(*(word + counter) == 'A' || *(word + counter) == 'D' || *(word + counter) == 'G' || *(word + counter) == 'O' || *(word + counter) == 'P' || *(word + counter) == 'Q' || *(word + counter) == 'R')
+    if(iter < length){
+        if( *(word + iter) == 'A' || *(word + iter) == 'D' || *(word + iter) == 'O' || *(word + iter) == 'P' || *(word + iter) == 'Q' || *(word + iter) == 'R')
             num_holes++;
-        else if (*(word + counter) == 'B')
+        else if( *(word + iter) == 'B')
             num_holes = num_holes + 2;
         else
             num_holes = num_holes;
-        counter++;
-        return countnHoles(word);
+        iter++;
+        return countHoles(word);
     }
-    return num_holes;
+    iter = 0;
+    return num_holes;  
+}
+
+
+// Please do not change the main()
+int main() 
+{
+    string input;
+
+    int nHoles=0;
+    
+    while(getline(cin,input))
+    {
+        if(isdigit(input[0]))
+        {
+            nHoles=countHoles(stoi(input));
+        }
+        else
+        {
+            char * carr = new char[input.length()];
+            carr = strcpy(carr, input.c_str());
+            nHoles =countHoles(carr);
+        }
+    }
+    
+    cout << nHoles <<" holes";
+    return 0;
 }
