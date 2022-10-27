@@ -6,8 +6,9 @@ Each of these three classes should have a function getdata() to get data from th
 using namespace std;
 
 class Publication{
-    public:
+    private:
     string title; float price;
+    public:
     void getdata(){
         getline(cin, title); cin >> price; 
     }
@@ -18,8 +19,9 @@ class Publication{
 };
 
 class book : public Publication {
-    public:
+    private:
     int page_count;
+		public:
     void getdata(){
         Publication::getdata(); cin >> page_count;
     }
@@ -30,8 +32,9 @@ class book : public Publication {
 };
 
 class tape : public Publication {
-    public:
+    private:
     float playing_time;
+		public:
     void getdata(){
         Publication::getdata(); cin >> playing_time;
     }
@@ -190,7 +193,7 @@ This class is already modell. The two data items are a type unsigned int to hold
 
 LyariTollBooth:
 At Lyari TollBooth, many cars go without paying the toll. So, management decided to impose Rs. 500 fine to such cars, and keep track of the fine as well. You already have implemented TollBooth class, and it all works well, and you don't want to change this class. Rather, you'll be implementing a new class LyariTollBooth that adds functionality to the fine, while it uses the functionality already developed in TollBooth class.
-Finally, a member function called display() displays the two totals. Make appropriate member functions const.
+Finally, a member function called display() displays the two totals. Make appropriate member functions const. */
 
 #include <map>
 #include <set>
